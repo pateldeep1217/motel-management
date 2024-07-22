@@ -1,8 +1,5 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
-
-import { Bars3Icon, BellIcon } from "@heroicons/react/24/outline";
-
 import { Button } from "./ui/button";
+import { IconBell, IconSearch } from "@tabler/icons-react";
 
 interface HeaderProps {
   className?: string;
@@ -11,12 +8,12 @@ interface HeaderProps {
 function Header({ className }: HeaderProps) {
   return (
     <header className={`flex items-center justify-end  ${className}`}>
-      <div>
+      <div className="flex items-center justify-center">
         <Button variant="ghost">
-          <MagnifyingGlassIcon className="h-6 w-6" />
+          <IconSearch size={20} />
         </Button>
         <Button variant="ghost">
-          <BellIcon className="h-6 w-6" />
+          <IconBell size={20} />
         </Button>
       </div>
     </header>

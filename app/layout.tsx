@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <div className="border grid grid-cols-[auto_1fr_1fr] grid-rows-[4rem_1fr_1fr] h-screen md:grid-cols-[20rem_1fr_1fr] md:grid-rows-[4rem_1fr_1fr]">
+        <div className="border grid grid-cols-[auto_1fr_1fr] grid-rows-[4rem_1fr_1fr] h-screen md:grid-cols-[18rem_1fr_1fr] md:grid-rows-[4rem_1fr_1fr]">
           <Navigation className="md:row-span-3 p-2 md:p-0" />
           <Header className="col-span-2 p-2" />
           <main className="col-span-3 row-span-3  md:col-start-2 ">

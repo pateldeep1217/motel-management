@@ -8,6 +8,7 @@ import {
   IconHome,
   IconUser,
 } from "@tabler/icons-react";
+import { usePathname } from "next/navigation";
 
 interface LinkProps {
   href: string;
@@ -50,19 +51,25 @@ const navigationLinks = [
 ];
 
 function NavigationLinks() {
+  const pathname = usePathname();
   return (
-    <ul className="flex flex-col gap-2 w-full">
-      {navigationLinks.map(({ href, label, icon }) => (
-        <li key={label} className="w-full">
-          <Link
-            href={href}
-            className="flex items-center gap-2 p-4 rounded hover:bg-muted"
-          >
-            {icon}
-            {label}
-          </Link>
-        </li>
-      ))}
+    <ul className="flex flex-col gap-2 w-full mt-12">
+      {navigationLinks.map(({ href, label, icon }) => {
+        const isActive = pathname === href;
+        return (
+          <li key={label} className="w-full">
+            <Link
+              href={href}
+              className={`flex items-center gap-2 py-2 px-6  rounded hover:bg-muted ${
+                isActive ? "bg-muted" : ""
+              } `}
+            >
+              {icon}
+              {label}
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 }
