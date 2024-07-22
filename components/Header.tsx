@@ -10,7 +10,7 @@ interface HeaderProps {
 
 function Header({ className }: HeaderProps) {
   return (
-    <header className={`flex items-center justify-end px-4 ${className}`}>
+    <header className={`flex items-center justify-end p-4 ${className}`}>
       <div>
         <Button variant="ghost">
           <MagnifyingGlassIcon className="h-6 w-6" />

@@ -19,43 +19,43 @@ const navigationLinks = [
   {
     href: "/",
     label: "Dashboard",
-    icon: <HomeIcon className="h-6 w-6" />,
+    icon: <HomeIcon className="h-5 w-5" />,
     active: true,
   },
   {
     href: "/rooms",
     label: "Rooms",
-    icon: <BuildingOfficeIcon className="h-6 w-6" />,
+    icon: <BuildingOfficeIcon className="h-5 w-5" />,
   },
   {
     href: "/reservations",
     label: "Reservations",
-    icon: <CalendarIcon className="h-6 w-6" />,
+    icon: <CalendarIcon className="h-5 w-5" />,
   },
   {
     href: "/customers",
     label: "Customers",
-    icon: <UserIcon className="h-6 w-6" />,
+    icon: <UserIcon className="h-5 w-5" />,
   },
   {
     href: "/reports",
     label: "Reports",
-    icon: <ChartBarSquareIcon className="h-6 w-6" />,
+    icon: <ChartBarSquareIcon className="h-5 w-5" />,
   },
   {
     href: "/settings",
     label: "Settings",
-    icon: <CogIcon className="h-6 w-6" />,
+    icon: <CogIcon className="h-5 w-5" />,
   },
 ];
 function NavigationLinks() {
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className="flex flex-col gap-2 w-full px-4">
       {navigationLinks.map(({ href, label, icon }) => (
-        <li key={label}>
+        <li key={label} className="w-full ">
           <Link
             href={href}
-            className="flex items-center gap-2 p-2 rounded hover:bg-gray-200"
+            className="flex items-center gap-2 p-2 rounded hover:bg-muted"
           >
             {icon}
             {label}
