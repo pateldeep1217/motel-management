@@ -11,14 +11,14 @@ interface LogoProps {
 const Logo = ({
   svg: Svg,
   size = 50,
-  color = "#000",
+
   text = "StaySync",
   className,
 }: LogoProps) => {
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <Svg width={size} height={size} fill={color} />
-      <span className={`text-${color} text-lg font-bold`}>{text}</span>
+    <div className={cn("flex items-center gap-4", className)}>
+      <Svg width={size} height={size} className="border" />
+      <span className=" text-2xl font-semibold">{text}</span>
     </div>
   );
 };
