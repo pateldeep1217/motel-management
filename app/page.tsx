@@ -1,9 +1,6 @@
 import Header from "@/components/Header";
+import Navigation from "@/components/Navigation";
 
 export default function Home() {
-  return (
-    <main className="">
-      <Header />
-    </main>
-  );
+  return <div className="">Main Page</div>;
 }

@@ -2,13 +2,15 @@ import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
 import { Bars3Icon, BellIcon } from "@heroicons/react/24/outline";
 
-import Navigation from "./Navigation";
 import { Button } from "./ui/button";
 
-function Header() {
+interface HeaderProps {
+  className?: string;
+}
+
+function Header({ className }: HeaderProps) {
   return (
-    <header className="flex items-center justify-between">
-      <Navigation />
+    <header className={`flex items-center justify-end px-4 ${className}`}>
       <div>
         <Button variant="ghost">
           <MagnifyingGlassIcon className="h-6 w-6" />

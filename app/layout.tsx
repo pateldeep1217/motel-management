@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+        <div className="border grid grid-cols-[auto_1fr_1fr] grid-rows-[auto_1fr_1fr] h-screen lg:grid-cols-[30vw_1fr_1fr] lg:grid-rows-[4rem_1fr_1fr]">
+          <Navigation className="lg:row-span-3" />
+          <Header className="col-span-2 " />
+          <main className="col-span-3 row-span-3  lg:col-start-2 ">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }
