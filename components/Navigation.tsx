@@ -1,6 +1,5 @@
 "use client";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import NavigationLinks from "./NavigationLinks";
@@ -45,9 +44,30 @@ const sidebarVariants = {
 
 function Navigation({ className }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [initialRender, setInitialRender] = useState(true);
+
+  // Function to check the viewport size
+  const checkViewport = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  useEffect(() => {
+    // Initial check
+    checkViewport();
+    // Add event listener
+    window.addEventListener("resize", checkViewport);
+    // Cleanup event listener
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
+
+  useEffect(() => {
+    // Set initial render to false after the first render
+    setInitialRender(false);
+  }, []);
 
   return (
-    <nav className={`relative flex items-center  ${className}`}>
+    <nav className={`relative flex items-center ${className}`}>
       <Button
         variant="ghost"
         className="md:hidden"
@@ -56,15 +76,20 @@ function Navigation({ className }: NavigationProps) {
         <IconMenu3 size={20} />
       </Button>
       {/* Desktop Navigation */}
-      <div className="hidden md:flex md:flex-col h-screen w-full border-r shadow-xl">
+      <motion.div
+        className="hidden md:flex md:flex-col h-screen w-full border-r shadow-xl glass-sidebar"
+        initial={{ x: initialRender ? 0 : "-100%" }}
+        animate={{ x: isMobile ? "-100%" : "0" }}
+        transition={{ duration: 0.5, type: "spring", damping: 12 }}
+      >
         <Logo svg={LogoSVG} className="p-6" />
         <NavigationLinks />
-      </div>
+      </motion.div>
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0  bg-black bg-opacity-70  z-50"
+            className="fixed inset-0 bg-black bg-opacity-70 z-50"
             variants={backdropVariants}
             initial="hidden"
             animate="visible"

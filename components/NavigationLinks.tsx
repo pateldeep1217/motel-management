@@ -1,59 +1,13 @@
 import Link from "next/link";
 import React from "react";
-import {
-  IconBuilding,
-  IconSettings,
-  IconCalendar,
-  IconChartBar,
-  IconHome,
-  IconUser,
-} from "@tabler/icons-react";
+
 import { usePathname } from "next/navigation";
-
-interface LinkProps {
-  href: string;
-  label: string;
-  icon: React.ReactNode;
-}
-
-const navigationLinks = [
-  {
-    href: "/",
-    label: "Dashboard",
-    icon: <IconHome size={20} />,
-    active: true,
-  },
-  {
-    href: "/rooms",
-    label: "Rooms",
-    icon: <IconBuilding size={20} />,
-  },
-  {
-    href: "/reservations",
-    label: "Reservations",
-    icon: <IconCalendar size={20} />,
-  },
-  {
-    href: "/customers",
-    label: "Customers",
-    icon: <IconUser size={20} />,
-  },
-  {
-    href: "/reports",
-    label: "Reports",
-    icon: <IconChartBar size={20} />,
-  },
-  {
-    href: "/settings",
-    label: "Settings",
-    icon: <IconSettings size={20} />,
-  },
-];
+import { navigationLinks } from "@/lib/navigationLinks";
 
 function NavigationLinks() {
   const pathname = usePathname();
   return (
-    <ul className="flex flex-col gap-2 w-full mt-12">
+    <ul className="flex flex-col gap-2 w-full mt-4">
       {navigationLinks.map(({ href, label, icon }) => {
         const isActive = pathname === href;
         return (

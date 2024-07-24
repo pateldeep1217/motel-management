@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
-
+import BreadCrumb from "@/components/BreadCrumb";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <div className="border grid grid-cols-[auto_1fr_1fr] grid-rows-[4rem_1fr_1fr] h-screen md:grid-cols-[18rem_1fr_1fr] md:grid-rows-[4rem_1fr_1fr]">
+        <div className=" grid grid-cols-[auto_1fr_1fr] grid-rows-[4rem_1fr_1fr] h-screen md:grid-cols-[16rem_1fr_1fr] md:grid-rows-[4rem_1fr_1fr]">
           <Navigation className="md:row-span-3 p-2 md:p-0" />
+
           <Header className="col-span-2 p-2" />
-          <main className="col-span-3 row-span-3  md:col-start-2 ">
+          <main className="col-span-3 row-span-3  md:col-start-2  space-y-10 ml-10">
+            <BreadCrumb />
             {children}
           </main>
         </div>
