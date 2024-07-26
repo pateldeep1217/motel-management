@@ -23,7 +23,7 @@ export default function RootLayout({
           <Navigation className="md:row-span-3 p-2 md:p-0" />
 
           <Header className="col-span-2 p-2" />
-          <main className="col-span-3 row-span-3  md:col-start-2  space-y-10 ml-10">
+          <main className="col-span-3 row-span-3  md:col-start-2   ">
             <BreadCrumb />
             {children}
           </main>

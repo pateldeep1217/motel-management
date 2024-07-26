@@ -39,15 +39,16 @@ export const motels = pgTable("motels", {
 });
 
 export const rooms = pgTable("rooms", {
-  id: uuid("id").default(uuidv4()).primaryKey(),
-  roomNumber: text("room_number").notNull(),
-  type: text("type").notNull(),
-  status: RoomStatusEnum("status").default("available"),
-  pricePerNight: real("price_per_night").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  id: uuid("id").primaryKey(), // UUID validation
+  roomNumber: text("room_number").notNull(), // Ensure room_number is a non-empty string
+  type: text("type").notNull(), // Ensure type is a non-empty string
+  status: RoomStatusEnum("status").default("available"), // Default value and enumeration
+  pricePerNight: real("price_per_night").notNull(), // Ensure price is a positive number
+  createdAt: timestamp("created_at").defaultNow(), // Ensure created_at is a valid timestamp
+  updatedAt: timestamp("updated_at").defaultNow(), // Ensure updated_at is a valid timestamp
   motelID: uuid("motel_id")
     .references(() => motels.id, { onDelete: "cascade" })
-    .notNull(),
+    .notNull(), // UUID validation and foreign key reference
 });
 
 export const guests = pgTable("guests", {
@@ -93,7 +94,7 @@ export const bookings = pgTable("bookings", {
 });
 
 export const roomServiceRequests = pgTable("room_service_requests", {
-  id: uuid("id").default(uuidv4()).primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
   bookingID: uuid("booking_id")
     .references(() => bookings.id, { onDelete: "cascade" })
     .notNull(),

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "bookings" (
-	"id" uuid PRIMARY KEY DEFAULT '6cb57e5d-434e-47e6-9783-e18dc8ab150c' NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"guest_id" uuid NOT NULL,
 	"room_id" uuid NOT NULL,
 	"check_in_date" timestamp NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS "bookings" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "guests" (
-	"id" uuid PRIMARY KEY DEFAULT '1c24b3e8-5463-4478-ba2f-2117ebac2b1d' NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"email" text NOT NULL,
 	"phone" text,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS "guests" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "motels" (
-	"id" uuid PRIMARY KEY DEFAULT '5aeff2ba-ab8c-4581-9a37-bbfaba9905a8' NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"address" text NOT NULL,
 	"phone" text,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "motels" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "room_service_requests" (
-	"id" uuid PRIMARY KEY DEFAULT '195476df-c890-47aa-8786-f672244767c9' NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"booking_id" uuid NOT NULL,
 	"service_type" text NOT NULL,
 	"request_details" text,
@@ -39,21 +39,22 @@ CREATE TABLE IF NOT EXISTS "room_service_requests" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "rooms" (
-	"id" uuid PRIMARY KEY DEFAULT 'c0d74d11-eae2-4f09-815d-70b9a2df1430' NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"room_number" text NOT NULL,
 	"type" text NOT NULL,
 	"status" "room_status" DEFAULT 'available',
 	"price_per_night" real NOT NULL,
 	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now(),
 	"motel_id" uuid NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "staff" (
-	"id" uuid PRIMARY KEY DEFAULT '730cfb94-f418-4f7e-bb87-537e80e0688d' NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"email" text NOT NULL,
 	"phone" text,
-	"role" "staff_role" DEFAULT 'receptionist',
+	"staff_role" "staff_role",
 	"created_at" timestamp DEFAULT now(),
 	"motel_id" uuid NOT NULL
 );
@@ -99,3 +100,11 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
+--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "bookings_guest_idx" ON "bookings" USING btree ("guest_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "bookings_room_idx" ON "bookings" USING btree ("room_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "guests_motel_idx" ON "guests" USING btree ("motel_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "motels_name_idx" ON "motels" USING btree ("name");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "room_service_requests_booking_idx" ON "room_service_requests" USING btree ("booking_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "rooms_motel_idx" ON "rooms" USING btree ("motel_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "staff_motel_idx" ON "staff" USING btree ("motel_id");

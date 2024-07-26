@@ -1,5 +1,5 @@
 {
-  "id": "37f20d3a-c363-40fc-be64-55cb2c4e0d66",
+  "id": "ce50db6c-ba05-4697-8d4a-e8ded0c19ac7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,8 +12,7 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'6cb57e5d-434e-47e6-9783-e18dc8ab150c'"
+          "notNull": true
         },
         "guest_id": {
           "name": "guest_id",
@@ -67,7 +66,38 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "bookings_guest_idx": {
+          "name": "bookings_guest_idx",
+          "columns": [
+            {
+              "expression": "guest_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "bookings_room_idx": {
+          "name": "bookings_room_idx",
+          "columns": [
+            {
+              "expression": "room_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "bookings_guest_id_guests_id_fk": {
           "name": "bookings_guest_id_guests_id_fk",
@@ -120,8 +150,7 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'1c24b3e8-5463-4478-ba2f-2117ebac2b1d'"
+          "notNull": true
         },
         "name": {
           "name": "name",
@@ -161,7 +190,23 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "guests_motel_idx": {
+          "name": "guests_motel_idx",
+          "columns": [
+            {
+              "expression": "motel_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "guests_motel_id_motels_id_fk": {
           "name": "guests_motel_id_motels_id_fk",
@@ -188,8 +233,7 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'5aeff2ba-ab8c-4581-9a37-bbfaba9905a8'"
+          "notNull": true
         },
         "name": {
           "name": "name",
@@ -223,7 +267,23 @@
           "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "motels_name_idx": {
+          "name": "motels_name_idx",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -236,8 +296,7 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'195476df-c890-47aa-8786-f672244767c9'"
+          "notNull": true
         },
         "booking_id": {
           "name": "booking_id",
@@ -272,7 +331,23 @@
           "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "room_service_requests_booking_idx": {
+          "name": "room_service_requests_booking_idx",
+          "columns": [
+            {
+              "expression": "booking_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "room_service_requests_booking_id_bookings_id_fk": {
           "name": "room_service_requests_booking_id_bookings_id_fk",
@@ -299,8 +374,7 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'c0d74d11-eae2-4f09-815d-70b9a2df1430'"
+          "notNull": true
         },
         "room_number": {
           "name": "room_number",
@@ -335,6 +409,13 @@
           "notNull": false,
           "default": "now()"
         },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
         "motel_id": {
           "name": "motel_id",
           "type": "uuid",
@@ -342,7 +423,23 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "rooms_motel_idx": {
+          "name": "rooms_motel_idx",
+          "columns": [
+            {
+              "expression": "motel_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "rooms_motel_id_motels_id_fk": {
           "name": "rooms_motel_id_motels_id_fk",
@@ -369,8 +466,7 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true,
-          "default": "'730cfb94-f418-4f7e-bb87-537e80e0688d'"
+          "notNull": true
         },
         "name": {
           "name": "name",
@@ -390,13 +486,12 @@
           "primaryKey": false,
           "notNull": false
         },
-        "role": {
-          "name": "role",
+        "staff_role": {
+          "name": "staff_role",
           "type": "staff_role",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'receptionist'"
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -412,7 +507,23 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "staff_motel_idx": {
+          "name": "staff_motel_idx",
+          "columns": [
+            {
+              "expression": "motel_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
         "staff_motel_id_motels_id_fk": {
           "name": "staff_motel_id_motels_id_fk",

@@ -22,7 +22,7 @@ function BreadCrumb() {
     href === "/" || href === "/dashboard";
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className="ml-8">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink
