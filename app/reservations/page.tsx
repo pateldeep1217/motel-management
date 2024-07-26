@@ -1,9 +1,10 @@
 import React from "react";
+import Example from "../../components/week_view";
 
 function page() {
   return (
     <div>
-      <h1>Rservation</h1>
+      <Example />
     </div>
   );
 }

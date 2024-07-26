@@ -55,8 +55,4 @@ export const columns: ColumnDef<Room>[] = [
       return <div>{formattedDate}</div>;
     },
   },
-  {
-    accessorKey: "motelID",
-    header: "Motel ID",
-  },
 ];
