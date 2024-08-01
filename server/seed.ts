@@ -6,7 +6,7 @@ import { booking } from "./schema/booking";
 import { payment } from "./schema/payment";
 import { roomServiceRequest } from "./schema/roomServiceRequest";
 import { staff } from "./schema/staff";
-import { user } from "./schema/user";
+import { user } from "./schema/user"; // Import the user schema
 import {
   generateMotelData,
   generateRoomData,
@@ -15,27 +15,26 @@ import {
   generatePaymentData,
   generateRoomServiceRequestData,
   generateStaffData,
-  generateUserData,
+  generateUserData, // Import the user data generator
 } from "./generateData";
 
 async function seed() {
   try {
     // Generate data
     const motels = generateMotelData();
-
+    const users = generateUserData(motels); // Generate user data
     const rooms = generateRoomData(motels);
     const guests = generateGuestData(motels);
     const bookings = generateBookingData(rooms, guests, motels);
     const payments = generatePaymentData(bookings);
     const roomServiceRequests = generateRoomServiceRequestData(bookings);
-    const users = generateUserData(motels);
-    const staffMembers = generateStaffData(motels, users);
+    const staffMembers = generateStaffData(motels, users); // Pass users to generate staff data
 
     // Insert data into the database
     await db.insert(motel).values(motels);
     console.log("Motel data inserted");
 
-    await db.insert(user).values(users);
+    await db.insert(user).values(users); // Insert user data
     console.log("User data inserted");
 
     await db.insert(room).values(rooms);

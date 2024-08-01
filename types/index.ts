@@ -36,19 +36,18 @@ export const Motel = z.object({
 export type Motel = z.infer<typeof Motel>;
 
 // Room Schema
-export const RoomSchema = z.object({
+export const roomSchema = z.object({
   id: z.string().uuid(),
   motelId: z.string().uuid(),
-  roomNumber: z.number().int().positive(),
+  roomNumber: z.number(),
   type: z.string().max(50),
-  status: RoomStatusEnum,
-  pricePerNight: z.coerce
-    .number({ invalid_type_error: "Price must be a number" })
-    .positive({ message: "Price must be a positive number" }),
+  status: z.enum(["available", "occupied", "maintenance"]),
+  pricePerNight: z.string().transform((value) => parseFloat(value)),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
-export type RoomSchemaType = z.infer<typeof RoomSchema>;
-
+export type RoomSchemaType = z.infer<typeof roomSchema>;
 // Guest Schema
 export const Guest = z.object({
   id: z

@@ -7,6 +7,7 @@ export default async function getRooms() {
     if (!rooms) {
       return { status: "error", message: "No rooms found" };
     }
+
     return { status: "sucess", data: rooms };
   } catch (error) {
     return { status: "error", message: "Failed to fetch rooms" };
