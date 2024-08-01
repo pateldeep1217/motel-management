@@ -16,7 +16,7 @@ const Logo = ({
   className,
 }: LogoProps) => {
   return (
-    <div className={cn("flex items-center gap-4 border", className)}>
+    <div className={cn("flex items-center gap-4 ", className)}>
       <Svg width={size} height={size} className="" />
       <span className=" text-2xl font-semibold">{text}</span>
     </div>

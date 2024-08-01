@@ -79,7 +79,11 @@ function DataTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <TableHead key={header.id} className=" min-w-32 max-w-52">
+                <TableHead
+                  key={header.id}
+                  className=" min-w-20
+                 max-w-52"
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(

@@ -21,7 +21,7 @@ export type StaffRole = z.infer<typeof StaffRoleEnum>;
 // ** Schemas **
 
 // Motel Schema
-export const MotelSchema = z.object({
+export const Motel = z.object({
   id: z
     .string()
     .uuid()
@@ -33,27 +33,24 @@ export const MotelSchema = z.object({
   createdAt: z.date().default(() => new Date()),
 });
 
-export type Motel = z.infer<typeof MotelSchema>;
+export type Motel = z.infer<typeof Motel>;
 
 // Room Schema
 export const RoomSchema = z.object({
-  id: z
-    .string()
-    .uuid()
-    .default(() => uuidv4()),
-  roomNumber: z.string().min(1),
-  type: z.string().min(1),
-  status: RoomStatusEnum.default("available"),
-  pricePerNight: z.number().positive(),
-  createdAt: z.date().default(() => new Date()),
-  updatedAt: z.date().default(() => new Date()),
-  motelID: z.string().uuid(),
+  id: z.string().uuid(),
+  motelId: z.string().uuid(),
+  roomNumber: z.number().int().positive(),
+  type: z.string().max(50),
+  status: RoomStatusEnum,
+  pricePerNight: z.coerce
+    .number({ invalid_type_error: "Price must be a number" })
+    .positive({ message: "Price must be a positive number" }),
 });
 
-export type Room = z.infer<typeof RoomSchema>;
+export type RoomSchemaType = z.infer<typeof RoomSchema>;
 
 // Guest Schema
-export const GuestSchema = z.object({
+export const Guest = z.object({
   id: z
     .string()
     .uuid()
@@ -66,10 +63,10 @@ export const GuestSchema = z.object({
   motelID: z.string().uuid(),
 });
 
-export type Guest = z.infer<typeof GuestSchema>;
+export type Guest = z.infer<typeof Guest>;
 
 // Staff Schema
-export const StaffSchema = z.object({
+export const Staff = z.object({
   id: z
     .string()
     .uuid()
@@ -82,10 +79,10 @@ export const StaffSchema = z.object({
   motelID: z.string().uuid(),
 });
 
-export type Staff = z.infer<typeof StaffSchema>;
+export type Staff = z.infer<typeof Staff>;
 
 // Booking Schema
-export const BookingSchema = z.object({
+export const Booking = z.object({
   id: z
     .string()
     .uuid()
@@ -100,10 +97,10 @@ export const BookingSchema = z.object({
   motelID: z.string().uuid(),
 });
 
-export type Booking = z.infer<typeof BookingSchema>;
+export type Booking = z.infer<typeof Booking>;
 
 // Room Service Request Schema
-export const RoomServiceRequestSchema = z.object({
+export const RoomServiceRequest = z.object({
   id: z
     .string()
     .uuid()
@@ -115,7 +112,7 @@ export const RoomServiceRequestSchema = z.object({
   createdAt: z.date().default(() => new Date()),
 });
 
-export type RoomServiceRequest = z.infer<typeof RoomServiceRequestSchema>;
+export type RoomServiceRequest = z.infer<typeof RoomServiceRequest>;
 
 // // ** Example Usage of Types and Schemas **
 // const exampleMotel: Motel = {

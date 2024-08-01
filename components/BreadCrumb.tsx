@@ -35,7 +35,7 @@ function BreadCrumb() {
         {pathSegments.map((segment, index) => {
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLast = index === pathSegments.length - 1;
-          console.log(segment);
+
           return (
             <React.Fragment key={index}>
               <BreadcrumbSeparator />

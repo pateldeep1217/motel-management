@@ -1,8 +1,8 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Room, RoomStatus } from "@/types"; // Adjust the path as necessary
+import { RoomSchemaType } from "@/types"; // Adjust path as needed
 
-export const columns: ColumnDef<Room>[] = [
+export const columns: ColumnDef<RoomSchemaType>[] = [
   {
     accessorKey: "roomNumber",
     header: "Room Number",
@@ -15,10 +15,10 @@ export const columns: ColumnDef<Room>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status: RoomStatus = row.getValue("status");
+      const status: string = row.getValue("status"); // Ensure status is a string
 
       // Define styles for each status type
-      const statusStyles: Record<RoomStatus, string> = {
+      const statusStyles: Record<string, string> = {
         available: "bg-green-100 text-green-800",
         occupied: "bg-red-100 text-red-800",
         maintenance: "bg-yellow-100 text-yellow-800",
@@ -28,7 +28,7 @@ export const columns: ColumnDef<Room>[] = [
       const style = statusStyles[status] || "bg-gray-100 text-gray-800";
 
       return (
-        <div className={`p-2 textce rounded ${style}`}>
+        <div className={`p-2 rounded ${style}`}>
           {status.charAt(0).toUpperCase() + status.slice(1)}
         </div>
       );
